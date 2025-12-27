@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Study Session Planner</title>
+<style>
+body{font-family:Arial;text-align:center;background:#f2f2f2;padding-top:80px}
+.box{background:white;padding:20px;width:300px;margin:auto}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h3>Study Session Planner</h3>
+
+<input id="subject" placeholder="Subject"><br><br>
+<input id="minutes" type="number" placeholder="Minutes"><br><br>
+<button onclick="start()">Start Session</button>
+
+<p id="status"></p>
+</div>
+
+<script>
+let timer;
+
+function start(){
+  let subject=document.getElementById("subject").value;
+  let min=document.getElementById("minutes").value;
+  let sec=min*60;
+
+  localStorage.setItem("lastSubject",subject);
+
+  document.getElementById("status").innerText="Studying "+subject;
+
+  timer=setInterval(()=>{
+    sec--;
+    if(sec<=0){
+      clearInterval(timer);
+      document.getElementById("status").innerText="Session Completed!";
+    }
+  },1000);
+}
+</script>
+
+</body>
+</html>
